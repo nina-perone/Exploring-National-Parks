@@ -136,7 +136,7 @@ function ParkInfoComponent() {
                             
                             <div className='activities-list'>
                                 {park.activities?.map((activity) =>(<>
-                                <div className='activity'><p key={activity.id}>{activity.name}</p></div></>))}
+                                <a href="test" className='activity'><p key={activity.id}>{activity.name}</p></a></>))}
                             </div>
 
                             
