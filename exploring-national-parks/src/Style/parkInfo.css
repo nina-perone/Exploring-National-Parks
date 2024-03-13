@@ -98,6 +98,10 @@ img{
     font-weight: bold;
 }
 
+.parkInfo .activity:hover{
+    background-color: white;
+}
+
 
 .parkDetail{
     padding: 10px 10px 10px 10px;
