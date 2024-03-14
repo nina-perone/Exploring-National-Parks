@@ -1,4 +1,6 @@
 import React from 'react'
+import { Timeline } from 'react-twitter-widgets'
+
 
 /**
  * Component representing the welcome section of the homepage.
@@ -16,8 +18,20 @@ const Welcome = () => {
             </p>
             <div>
 
+                <Timeline
+                dataSource={{
+                    sourceType: 'profile',
+                    screenName: 'TempleAlert'
+                }}
+                options={{
+                    height: '400'
+                }}
+                />
+
             </div>
         </div>
+
+        
     )
 }
 
