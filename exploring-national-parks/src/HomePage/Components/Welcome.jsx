@@ -28,6 +28,7 @@ const Welcome = () => {
                     height: '400'
                 }}
                 />
+                
 
             </div>
         </div>
