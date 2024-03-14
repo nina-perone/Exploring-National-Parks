@@ -1,3 +1,6 @@
+# Canvas Assignment
+https://templeu.instructure.com/courses/139889/assignments/2494706
+
 # Exploring National Parks
 This is a web application intended to revolutionize how users interact with information from the National Parks Service, with a combined goal of increasing awareness of activities offered in the parks and helping individuals plan park visits. Users can use the application to learn more about national parks, or help inform their upcoming trips by using filters to find parks that contain activities within their interests.
 
