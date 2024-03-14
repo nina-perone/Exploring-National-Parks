@@ -1,0 +1,64 @@
+actor User
+
+activate User
+
+activate HTML
+
+User->HTML: HTTP Request
+HTML-->User: HTTP Response
+
+HTML->ReactComponent/JS: Loads
+activate ReactComponent/JS
+ReactComponent/JS->ReactComponent/JS: useEffect()
+
+ReactComponent/JS->NPSAPI ("backend"): asynchronous fetch()
+activate NPSAPI ("backend")
+NPSAPI ("backend")->ReactComponent/JS: json of parks
+deactivate NPSAPI ("backend")
+
+HTML->ReactComponent/JS: Loads
+ReactComponent/JS->ReactComponent/JS: useEffect()
+
+ReactComponent/JS->NPSAPI ("backend"): asynchronous fetch()
+activate NPSAPI ("backend")
+NPSAPI ("backend")->ReactComponent/JS: json of activities
+deactivate NPSAPI ("backend")
+
+
+ReactComponent/JS-->HTML: Update State
+deactivate ReactComponent/JS
+
+User->HTML: uses a select tag to choose park
+HTML-->User: Display Result
+
+User->HTML: uses a select tag to choose activities
+HTML-->User: Display Result
+
+User->HTML: uses a calendar input to choose dates
+HTML-->User: Display Result
+
+User->HTML: Clicks "plan trip" button
+HTML->ReactComponent/JS: Loads
+activate ReactComponent/JS
+
+ReactComponent/JS->ReactComponent/JS: useEffect()
+ReactComponent/JS->NPSAPI ("backend"): asynchronous fetch()
+activate NPSAPI ("backend")
+NPSAPI ("backend")-->ReactComponent/JS: json of alerts
+deactivate NPSAPI ("backend")
+
+ReactComponent/JS-->HTML: Update State
+deactivate ReactComponent/JS
+
+HTML-->User: Display Result
+
+
+
+
+
+
+
+
+
+
+
