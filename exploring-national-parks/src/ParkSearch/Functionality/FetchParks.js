@@ -17,6 +17,10 @@ export const FetchParks = async (activityArray, selectedStates) => {
     let activityReturnJson = [];
     let stateReturnJson = [];
     let returnJson = [];
+    console.log("Activity Array in fetch parks:")
+    console.log(activityArray);
+    console.log("selected states in fetch parks:")
+    console.log(selectedStates);
     try {
         //Get parks list for API
         const numActivities = activityArray.length;

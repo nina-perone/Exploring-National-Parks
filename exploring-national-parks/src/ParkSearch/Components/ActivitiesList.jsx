@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Activities } from '../Functionality/Activities'; // Importing the functionality
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated'
-import '../../Style/activitiesList.css';
+// import '../../Style/activitiesList.css';
 import { Link } from 'react-router-dom';
 import { FetchParks } from '../Functionality/FetchParks';
 import {StateOptions} from '../Functionality/StateOptions';
@@ -52,6 +52,8 @@ function ActivitiesList() {
         //console.log(selectedOption);
         try{
             setIsLoading(true);
+            console.log("selectedOption in activitiesList:");
+            console.log(selectedOption);
             const filtered = await FetchParks(selectedOption, selectedState);
             setIsLoading(false);
             filtered.data ? setParksFiltered(filtered.data) : setParksFiltered(filtered);
