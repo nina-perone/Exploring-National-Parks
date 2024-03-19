@@ -44,5 +44,6 @@ Follow this project board to know the latest status of the project:[https://gith
     1. `npm -v`
     2. `node -v`
 4. `cd exploring-national-parks `(the lowercase one)
-5. `npm install` will install the necessary packages 
-6. `npm start` will open the app in a new tab with a localhost server
+5. `npm install` will install the necessary packages
+6. `npm install react-twitter-widgets`  will install additional package for twitter widget
+7. `npm start` will open the app in a new tab with a localhost server
