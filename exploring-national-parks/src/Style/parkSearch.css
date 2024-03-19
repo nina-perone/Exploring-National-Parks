@@ -91,19 +91,19 @@
     z-index: 3;
 }
 
-.park-search .activities-list .search-button {
+.activities-list .search-button {
     width: 10rem;
     height: 4rem;
     border-radius: 10px;
     margin-bottom: 3rem;
 }
 
-.park-search .return-parks {
+.activities-list .park-search .return-parks {
     background-color: rgb(155, 184, 160) !important;
     border-style: dotted;
 }
 
-.park-search .return-parks .parks-number {
+.activities-list .park-search .return-parks .parks-number {
     padding: 15px 15px;
     background-color: rgba(255, 255, 255, 0.5);
 }

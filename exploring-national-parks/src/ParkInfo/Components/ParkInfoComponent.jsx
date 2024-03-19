@@ -9,12 +9,26 @@
 // ParkInfoComponent.jsx
 import React, { useState, useEffect } from 'react';
 import { ParkInfo } from '../Functionality/ParkInfo'; // Importing the functionality
+import { Activities } from '../../ParkSearch/Functionality/Activities'; // Importing the functionality
 import '../../Style/parkInfo.css';
+import '../../Style/activitiesList.css'
+import '../../Style/parkSearch.css'
 import ParkVideos from './ParkVideos';
+import { FetchParks } from '../../ParkSearch/Functionality/FetchParks';
 
 function ParkInfoComponent() {
     const [parkJSON, setParks] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [selectedState, setSelectedState] = useState([]);
+    const [selectedOption, setSelectedOption] = useState([]);
+    const [parksFiltered, setParksFiltered] = useState(null);
+    const [posts, setPosts] = useState([]);
+    var numOfParks = 0;
     
+
+    const activities = posts?.map((post) => { return { value: post.id, label: post.name } });
+
     var url = new URL(window.location);
     var page = 0;
     page = url.searchParams.get("page");
@@ -42,10 +56,44 @@ function ParkInfoComponent() {
             } catch (error) {
                 // Handle the error, if needed
             }
+
+            try {
+                const json = await Activities();
+                console.log(json);
+                setPosts(json.data);
+            } catch (error) {
+                // Handle the error, if needed
+            }
         };
 
         fetchData();
     }, []);
+
+    
+
+    const sendToAPI = async () => {
+        // console.log("selected option below");
+        //console.log(selectedOption);
+        try{
+            setIsLoading(true);
+            console.log("selectedOption in info component:");
+            console.log(selectedOption);
+            const filtered = await FetchParks(selectedOption, selectedState);
+            setIsLoading(false);
+            filtered.data ? setParksFiltered(filtered.data) : setParksFiltered(filtered);
+            console.log(selectedOption)
+        }catch{
+            console.log("error")
+        }
+        //console.log(parksFiltered["data"]);
+      
+        // console.log(parksFiltered.length)
+        // send selectedOption to API
+        if(typeof parksFiltered?.length !== 'undefined') {
+            numOfParks = parksFiltered?.length;
+        }
+    }
+
 
     if(parkJSON.length>1){ //list all the parks
         return (
@@ -136,7 +184,10 @@ function ParkInfoComponent() {
                             
                             <div className='activities-list'>
                                 {park.activities?.map((activity) =>(<>
-                                <a href="test" className='activity'><p key={activity.id}>{activity.name}</p></a></>))}
+                                {/* <a href="/ParkSearch" className='activity'><p key={activity.id}>{activity.name}</p></a></>))} */}
+                                {/* <Link to={{ pathname: '/ParkSearch', state: {selectedOption: activity.name},  }} className='activity'><p key={activity.id}>{activity.name}</p></Link> </>))} */}
+                                <button onClick={(event) => { selectedOption.push(activity); sendToAPI();}} type ="button" name = "activityButton" className ="activity"><p key={activity.id}>{activity.name}</p></button> </>))}
+                                
                             </div>
 
                             
@@ -144,6 +195,33 @@ function ParkInfoComponent() {
                         </div>
                         </>
                     ))}
+
+                <div className="return-parks">
+                <div className="parks-number">
+                    <h2>{isLoading ? 'Loading Parks...' : `Showing ${numOfParks} parks` + selectedOption}</h2>
+                </div>
+                <div className="parks">
+                    {parksFiltered?.map((park) => (
+                        <div key={park.id} className="post-card">
+                            <div>
+                                <div className="learn-more-dropdown">
+                                    <div>
+                                        <p className="learn-more-name">{park.fullName}</p>
+                                        <p>{park.states}</p>
+                                    </div>
+                                    <div className="learn-more-option">
+                                        <a href={'ParkInfo?parkCode='+park.parkCode}><button className="learn-more-button">Learn More</button></a>
+                                    </div>
+                                </div>
+                                <img src={park.images.length !== 0  ? park.images[0].url : ''} alt=''/>
+                            </div>
+                            <p className="description">{park.description}</p>
+                        </div>
+                    ))}
+                        
+                </div>
+
+            </div>
             </div>
         );
     }
